@@ -3,6 +3,7 @@
 #include <cmath>
 #include <random>
 #include <algorithm>
+#include "ManagedAllocator.hpp"
 
 // THIS IS A DIRECT TRANSLATION TO C++11 FROM THE REFERENCE
 // JAVA IMPLEMENTATION OF THE IMPROVED PERLIN FUNCTION (see http://mrl.nyu.edu/~perlin/noise/)
@@ -12,6 +13,7 @@
 
 // Initialize with the reference values for the permutation vector
 template <typename T>
+__forceinline__ __host__ __device__ 
 PerlinNoise<T>::PerlinNoise(int* vector) // Initialize the permutation vector with the reference values
   : p {vector}
 {}
@@ -50,16 +52,19 @@ T PerlinNoise<T>::noise(T x, T y, T z) {
 }
 
 template <typename T>
+__forceinline__ __host__ __device__ 
 T PerlinNoise<T>::fade(T t) { 
 	return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
 template <typename T>
+__forceinline__ __host__ __device__ 
 T PerlinNoise<T>::lerp(T t, T a, T b) { 
 	return a + t * (b - a); 
 }
 
 template <typename T>
+__forceinline__ __host__ __device__ 
 T PerlinNoise<T>::grad(int hash, T x, T y, T z) {
 	int h = hash & 15;
 	// Convert lower 4 bits of hash inot 12 gradient directions
@@ -71,9 +76,9 @@ T PerlinNoise<T>::grad(int hash, T x, T y, T z) {
 // Out of class funcitons:
 
 // Generate a new permutation vector based on the value of seed
-std::vector<int> generator(unsigned int seed)
+std::vector<int, managed_allocator<int>> generator(unsigned int seed)
 {
-    std::vector<int> p(256);
+    std::vector<int, managed_allocator<int>> p(256);
 
 	// Fill p with values from 0 to 255
 	std::iota(p.begin(), p.end(), 0);

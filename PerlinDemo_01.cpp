@@ -1,6 +1,7 @@
 #include <cmath>
 #include "ppm.hpp"
 #include "PerlinNoise.hpp"
+#include "ManagedAllocator.hpp"
 
 int main() {
 	// Define the size of the image
@@ -12,7 +13,7 @@ int main() {
 	// Create a PerlinNoise object with a random permutation vector generated with seed
 	unsigned int seed = 237;
 
-    std::vector<int> permutation = generator(seed);
+    std::vector<int, managed_allocator<int>> permutation = generator(seed);
 
 	PerlinNoise<double> pn(permutation.data());
 

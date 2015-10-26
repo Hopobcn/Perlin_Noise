@@ -3,6 +3,10 @@ project(PerlinNoiseDemo CXX)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+find_package(CUDA REQUIRED)
+
+include_directories(${CUDA_INCLUDE_DIRS})
+
 add_library(libppm ppm.cpp)
 
 add_executable(demo-0 PerlinDemo_00.cpp) 
