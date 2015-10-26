@@ -3,7 +3,7 @@
 #include <sstream>
 #include <exception>
 
-#include "ppm.h"
+#include "ppm.hpp"
 
 //init with default values
 

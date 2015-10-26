@@ -1,9 +1,8 @@
 //Process a binary PPM file
+#pragma once
+
 #include <vector>
 #include <string>
-
-#ifndef PPM_H
-#define PPM_H
 
 class ppm {
     void init();
@@ -33,5 +32,3 @@ public:
     //write the PPM image in fname
     void write(const std::string &fname);
 };
-
-#endif
