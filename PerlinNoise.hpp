@@ -12,9 +12,7 @@ template <typename T>
 class PerlinNoise {
 public:
 	// Initialize with the reference values for the permutation vector
-	PerlinNoise();
-	// Generate a new permutation vector based on the value of seed
-	PerlinNoise(unsigned int seed);
+	PerlinNoise(int* vector);
 	// Get a noise value, for 2D images z can have any value
 	T noise(T x, T y, T z);
 private:
@@ -23,7 +21,7 @@ private:
 	T grad(int hash, T x, T y, T z);
 
 	// The permutation vector
-	std::vector<int> p;
+	int* p;
 };
 
 #include "PerlinNoise-impl.hpp"

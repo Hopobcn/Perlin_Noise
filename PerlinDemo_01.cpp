@@ -11,7 +11,10 @@ int main() {
 
 	// Create a PerlinNoise object with a random permutation vector generated with seed
 	unsigned int seed = 237;
-	PerlinNoise<double> pn(seed);
+
+    std::vector<int> permutation = generator(seed);
+
+	PerlinNoise<double> pn(permutation.data());
 
 	unsigned int kk = 0;
 	// Visit every pixel of the image and assign a color generated with Perlin noise
