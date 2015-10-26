@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "ManagedAllocator.hpp"
 
 class ppm {
     void init();
@@ -12,9 +13,9 @@ class ppm {
 
 public:
     //arrays for storing the R,G,B values
-    std::vector<unsigned char> r;
-    std::vector<unsigned char> g;
-    std::vector<unsigned char> b;
+    std::vector<unsigned char, managed_allocator<unsigned char>> r;
+    std::vector<unsigned char, managed_allocator<unsigned char>> g;
+    std::vector<unsigned char, managed_allocator<unsigned char>> b;
     //
     unsigned int height;
     unsigned int width;

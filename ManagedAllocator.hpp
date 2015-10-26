@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cuda.h>
+#include <cuda_runtime.h>
 #include <cassert>
 
 // This is an allocator to be used in STL containers
@@ -16,9 +17,10 @@ public:
     using const_pointer = const T*;
 
     pointer allocate(size_type n) {
-        pointer tmp;
-        cudaError_t err = cudaMallocManaged(&tmp, n * sizeof(T), cudaMemAttachGlobal);
+        pointer result;
+        cudaError_t err = cudaMallocManaged(&result, n * sizeof(T), cudaMemAttachGlobal);
         assert(err == cudaSuccess);
+        return result;
     }
 
     void deallocate(pointer p, size_type) {
