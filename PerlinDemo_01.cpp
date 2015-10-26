@@ -11,7 +11,7 @@ int main() {
 
 	// Create a PerlinNoise object with a random permutation vector generated with seed
 	unsigned int seed = 237;
-	PerlinNoise pn(seed);
+	PerlinNoise<double> pn(seed);
 
 	unsigned int kk = 0;
 	// Visit every pixel of the image and assign a color generated with Perlin noise

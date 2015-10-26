@@ -8,6 +8,7 @@
 
 // I ADDED AN EXTRA METHOD THAT GENERATES A NEW PERMUTATION VECTOR (THIS IS NOT PRESENT IN THE ORIGINAL IMPLEMENTATION)
 
+template <typename T>
 class PerlinNoise {
 public:
 	// Initialize with the reference values for the permutation vector
@@ -15,13 +16,14 @@ public:
 	// Generate a new permutation vector based on the value of seed
 	PerlinNoise(unsigned int seed);
 	// Get a noise value, for 2D images z can have any value
-	double noise(double x, double y, double z);
+	T noise(T x, T y, T z);
 private:
-	double fade(double t);
-	double lerp(double t, double a, double b);
-	double grad(int hash, double x, double y, double z);
+	T fade(T t);
+	T lerp(T t, T a, T b);
+	T grad(int hash, T x, T y, T z);
 
 	// The permutation vector
 	std::vector<int> p;
 };
 
+#include "PerlinNoise-impl.hpp"

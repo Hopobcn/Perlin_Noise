@@ -10,7 +10,7 @@ int main() {
 	ppm image(width, height);
 
 	// Create a PerlinNoise object with the reference permutation vector
-	PerlinNoise pn;
+	PerlinNoise<double> pn;
 
 	unsigned int kk = 0;
 	// Visit every pixel of the image and assign a color generated with Perlin noise
