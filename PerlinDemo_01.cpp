@@ -1,6 +1,6 @@
 #include <cmath>
-#include "ppm.h"
-#include "PerlinNoise.h"
+#include "ppm.hpp"
+#include "PerlinNoise.hpp"
 
 int main() {
 	// Define the size of the image

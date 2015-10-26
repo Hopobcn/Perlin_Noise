@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 
 // THIS CLASS IS A TRANSLATION TO C++11 FROM THE REFERENCE
@@ -6,12 +8,7 @@
 
 // I ADDED AN EXTRA METHOD THAT GENERATES A NEW PERMUTATION VECTOR (THIS IS NOT PRESENT IN THE ORIGINAL IMPLEMENTATION)
 
-#ifndef PERLINNOISE_H
-#define PERLINNOISE_H
-
 class PerlinNoise {
-	// The permutation vector
-	std::vector<int> p;
 public:
 	// Initialize with the reference values for the permutation vector
 	PerlinNoise();
@@ -23,6 +20,8 @@ private:
 	double fade(double t);
 	double lerp(double t, double a, double b);
 	double grad(int hash, double x, double y, double z);
+
+	// The permutation vector
+	std::vector<int> p;
 };
 
-#endif
