@@ -13,7 +13,7 @@ void generate_image(int*           perm,
                     unsigned int width, unsigned int height) {
     const unsigned int i  = blockIdx.y * blockDim.y + threadIdx.y;
     const unsigned int j  = blockIdx.x * blockDim.x + threadIdx.x;
-    const unsigned int kk = i * height + j;
+    const unsigned int kk = i * width + j;
 
     if (i >= height or j >= width) return;
 
@@ -61,7 +61,7 @@ int main() {
     // Duplicate the permutation vector
 	permutation.insert(permutation.end(), permutation.begin(), permutation.end());
 
-    const int block_dim_x = 32;
+    const int block_dim_x = 16;
     const int block_dim_y = 16;
     dim3 dimGrid(std::ceil((double) width/(double)block_dim_x),
                  std::ceil((double)height/(double)block_dim_y));

@@ -9,13 +9,14 @@
 // and device
 
 template <typename T>
-class managed_allocator : public std::allocator<T>
+class managed_allocator 
 {
 public:
+    using value_type    = T;
     using size_type     = size_t;
     using pointer       = T*;
     using const_pointer = const T*;
-
+    
     pointer allocate(size_type n) {
         pointer result;
         cudaError_t err = cudaMallocManaged(&result, n * sizeof(T), cudaMemAttachGlobal);

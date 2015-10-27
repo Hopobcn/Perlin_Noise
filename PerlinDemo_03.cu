@@ -12,7 +12,7 @@ void generate_image(int*           perm,
                     unsigned int width, unsigned int height) {
     const unsigned int i  = blockIdx.y * blockDim.y + threadIdx.y;
     const unsigned int j  = blockIdx.x * blockDim.x + threadIdx.x;
-    const unsigned int kk = i * height + j;
+    const unsigned int kk = i * width + j;
 
     if (i >= height or j >= width) return;
 
@@ -65,7 +65,7 @@ int main() {
     assert(err == cudaSuccess);
 
 	// Save the image in a binary PPM file
-	image.write("figure_7_P.ppm");
+	image.write("figure_10_P.ppm");
 
 	return 0;
 }
