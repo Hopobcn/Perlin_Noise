@@ -14,7 +14,7 @@
 // Initialize with the reference values for the permutation vector
 template <typename T>
 __forceinline__ __host__ __device__ 
-PerlinNoise<T>::PerlinNoise(int* vector) // Initialize the permutation vector with the reference values
+PerlinNoise<T>::PerlinNoise(const int* vector) // Initialize the permutation vector with the reference values
   : p {vector}
 {}
 

@@ -6,10 +6,10 @@
 
 template <typename T>
 __global__
-void generate_image(int*           perm, 
-                    unsigned char* r,
-                    unsigned char* g,
-                    unsigned char* b,
+void generate_image(const int*     __restrict__ perm, 
+                    unsigned char* __restrict__ r,
+                    unsigned char* __restrict__ g,
+                    unsigned char* __restrict__ b,
                     unsigned int width, unsigned int height) {
     const unsigned int i  = blockIdx.y * blockDim.y + threadIdx.y;
     const unsigned int j  = blockIdx.x * blockDim.x + threadIdx.x;
@@ -23,12 +23,9 @@ void generate_image(int*           perm,
     // Create a PerlinNoise object with the reference permutation vector
     PerlinNoise<T> pn(perm);
 
-    // Typical Perlin noise
-    T n = pn.noise(10 * x, 10 * y, 0.8);
-
     // Wood like structure
-    n = 20 * pn.noise(x, y, 0.8);
-    n = n - floor(n);
+    T n = 20 * pn.noise(x, y, 0.8);
+    n -= floor(n);
 
     // Map the values to the [0, 255] interval, for simplicity we use 
     // tones of grey
@@ -39,7 +36,7 @@ void generate_image(int*           perm,
 
 int main() {
 	// Define the size of the image
-	unsigned int width = 600, height = 450;
+    unsigned int width = 4096, height = 2160; // 4K
 
 	// Create an empty PPM image
 	ppm image(width, height);
@@ -68,11 +65,11 @@ int main() {
     dim3 dimBlock(block_dim_x, block_dim_y);
 
 	// Visit every pixel of the image and assign a color generated with Perlin noise
-	generate_image<double><<<dimGrid, dimBlock>>>(permutation.data(),
-	                                              image.r.data(),
-	                                              image.g.data(),
-	                                              image.b.data(),
-	                                              width, height);
+	generate_image<float><<<dimGrid, dimBlock>>>(permutation.data(),
+	                                             image.r.data(),
+	                                             image.g.data(),
+	                                             image.b.data(),
+	                                             width, height);
     cudaError_t err = cudaDeviceSynchronize();
     assert(err == cudaSuccess);
 
