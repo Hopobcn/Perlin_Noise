@@ -1,17 +1,19 @@
-cmake_minimum_required(VERSION 2.8)
-project(PerlinNoiseDemo CXX)
+cmake_minimum_required(VERSION 3.0)
+project(PerlinNoiseDemo C CXX)
 
+find_package(Threads)
 find_package(CUDA REQUIRED)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
+set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -g -G -gencode arch=compute_35,code=sm_35 -gencode arch=compute_52,code=sm_52")
+set(CUDA_HOST_COMPILER "/usr/bin/g++-4.9")
 
 include_directories(${CUDA_INCLUDE_DIRS})
 
 add_library(libppm ppm.cpp)
 
-add_executable(demo-0 PerlinDemo_00.cpp) 
-add_executable(demo-1 PerlinDemo_01.cpp)
+cuda_add_executable(demo-0 PerlinDemo_00.cpp) 
+cuda_add_executable(demo-1 PerlinDemo_01.cpp)
 cuda_add_executable(demo-2 PerlinDemo_02.cu)
 cuda_add_executable(demo-3 PerlinDemo_03.cu)
 
