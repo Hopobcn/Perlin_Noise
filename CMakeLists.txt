@@ -5,7 +5,7 @@ find_package(Threads)
 find_package(CUDA REQUIRED)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
-set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -g -G -gencode arch=compute_35,code=sm_35 -gencode arch=compute_52,code=sm_52")
+set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -g -G -lineinfo -gencode arch=compute_35,code=sm_35 -gencode arch=compute_52,code=sm_52")
 set(CUDA_HOST_COMPILER "/usr/bin/g++-4.9")
 
 include_directories(${CUDA_INCLUDE_DIRS})

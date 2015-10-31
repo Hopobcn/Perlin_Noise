@@ -5,7 +5,7 @@
 
 int main() {
 	// Define the size of the image
-	unsigned int width = 600, height = 450;
+    unsigned int width = 4096, height = 2160; // 4K
 
 	// Create an empty PPM image
 	ppm image(width, height);

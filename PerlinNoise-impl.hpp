@@ -14,12 +14,12 @@
 // Initialize with the reference values for the permutation vector
 template <typename T>
 __forceinline__ __host__ __device__ 
-PerlinNoise<T>::PerlinNoise(int* vector) // Initialize the permutation vector with the reference values
+PerlinNoise<T>::PerlinNoise(const int* vector) // Initialize the permutation vector with the reference values
   : p {vector}
 {}
 
 template <typename T>
-T PerlinNoise<T>::noise(T x, T y, T z) {
+T PerlinNoise<T>::noise(T x, T y, T z) const {
 	// Find the unit cube that contains the point
 	int X = static_cast<int>(floor(x)) & 255;
 	int Y = static_cast<int>(floor(y)) & 255;
@@ -53,19 +53,19 @@ T PerlinNoise<T>::noise(T x, T y, T z) {
 
 template <typename T>
 __forceinline__ __host__ __device__ 
-T PerlinNoise<T>::fade(T t) { 
+T PerlinNoise<T>::fade(T t) const { 
 	return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
 template <typename T>
 __forceinline__ __host__ __device__ 
-T PerlinNoise<T>::lerp(T t, T a, T b) { 
+T PerlinNoise<T>::lerp(T t, T a, T b) const { 
 	return a + t * (b - a); 
 }
 
 template <typename T>
 __forceinline__ __host__ __device__ 
-T PerlinNoise<T>::grad(int hash, T x, T y, T z) {
+T PerlinNoise<T>::grad(int hash, T x, T y, T z) const {
 	int h = hash & 15;
 	// Convert lower 4 bits of hash inot 12 gradient directions
 	T u = h < 8 ? x : y;

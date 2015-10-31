@@ -15,16 +15,16 @@ template <typename T>
 class PerlinNoise {
 public:
 	// Initialize with the reference values for the permutation vector
-	__forceinline__ __host__ __device__ PerlinNoise(int* vector);
+	__forceinline__ __host__ __device__ PerlinNoise(const int* vector);
 	// Get a noise value, for 2D images z can have any value
-	__forceinline__ __host__ __device__ T noise(T x, T y, T z);
+	__forceinline__ __host__ __device__ T noise(T x, T y, T z) const;
 private:
-	__forceinline__ __host__ __device__ T fade(T t);
-	__forceinline__ __host__ __device__ T lerp(T t, T a, T b);
-	__forceinline__ __host__ __device__ T grad(int hash, T x, T y, T z);
+	__forceinline__ __host__ __device__ T fade(T t) const;
+	__forceinline__ __host__ __device__ T lerp(T t, T a, T b) const;
+	__forceinline__ __host__ __device__ T grad(int hash, T x, T y, T z) const;
 
 	// The permutation vector
-	int* p;
+	const int* p;
 };
 
 #include "PerlinNoise-impl.hpp"
